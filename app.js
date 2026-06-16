@@ -32,21 +32,35 @@ try {
     queueLimit: 0
   });
   
-  // Auto Create Table if not exists
+    // Auto Create Table if not exists
   (async () => {
     try {
-    const connection = await pool.getConnection();
-    await connection.query(
-      CREATE TABLE IF NOT EXISTS laporan (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        pelapor VARCHAR(255) NOT NULL,
-        judul VARCHAR(255) NOT NULL,
-        deskripsi TEXT NOT NULL,
-        foto VARCHAR(255)
-      )
-    );
-    connection.release();
-    console.log('Database table initialized successfully.');
+      // Connect without database first to ensure it exists
+      const tempPool = mysql.createPool({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        waitForConnections: true,
+        connectionLimit: 5,
+        queueLimit: 0
+      });
+      const tempConn = await tempPool.getConnection();
+      await tempConn.query("CREATE DATABASE IF NOT EXISTS " + process.env.DB_NAME);
+      tempConn.release();
+      tempPool.end();
+
+      const connection = await pool.getConnection();
+      await connection.query(
+        "CREATE TABLE IF NOT EXISTS laporan (" +
+        "  id INT AUTO_INCREMENT PRIMARY KEY," +
+        "  pelapor VARCHAR(255) NOT NULL," +
+        "  judul VARCHAR(255) NOT NULL," +
+        "  deskripsi TEXT NOT NULL," +
+        "  foto VARCHAR(255)" +
+        ")"
+      );
+      connection.release();
+      console.log('Database and table initialized successfully.');
     } catch (err) {
       console.error('Failed to init table:', err);
     }
@@ -105,4 +119,5 @@ app.post('/lapor', upload.single('foto'), async (req, res) => {
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
+
 
