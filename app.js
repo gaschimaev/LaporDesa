@@ -76,7 +76,7 @@ app.get('/', async (req, res) => {
     res.render('index', { laporan: rows, cloudfrontDomain: process.env.CLOUDFRONT_DOMAIN });
   } catch (error) {
     console.error(error);
-    res.send('Terjadi kesalahan saat memuat data database. Pastikan tabel laporan sudah ada di RDS.');
+    res.send('Database Error: ' + error.message);
   }
 });
 
@@ -119,5 +119,6 @@ app.post('/lapor', upload.single('foto'), async (req, res) => {
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
+
 
 
