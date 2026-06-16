@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaporDesa - Sistem Pengaduan</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .header { display: flex; justify-content: space-between; align-items: center; }
+        .btn { padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        .card { border: 1px solid #ddd; padding: 15px; margin-top: 15px; border-radius: 5px; }
+        img { max-width: 100%; height: auto; margin-top: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>LaporDesa 📢</h1>
+            <a href="/lapor" class="btn">+ Buat Laporan</a>
+        </div>
+        <p>Sistem Pengaduan Masyarakat Desa/Kelurahan Terpadu.</p>
+        <hr>
+        
+        <% if (laporan && laporan.length > 0) { %>
+            <% laporan.forEach(item => { %>
+                <div class="card">
+                    <h3><%= item.judul %></h3>
+                    <p><small>Oleh: <strong><%= item.pelapor %></strong></small></p>
+                    <p><%= item.deskripsi %></p>
+                    <% if (item.foto) { %>
+                        <p><strong>Lampiran Foto:</strong></p>
+                        <!-- Menggunakan CloudFront Domain dari Environment Variable -->
+                        <img src="https://<%= cloudfrontDomain %>/<%= item.foto %>" alt="Foto Laporan">
+                    <% } %>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>Belum ada laporan masuk.</p>
+        <% } %>
+    </div>
+</body>
+</html>

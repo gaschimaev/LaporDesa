@@ -1,0 +1,32 @@
+{
+  "family": "lapordesa-task",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "lapordesa-app",
+      "image": "IMAGE_PLACEHOLDER",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        { "name": "PORT", "value": "80" },
+        { "name": "DB_HOST", "value": "GANTI_DENGAN_ENDPOINT_RDS_ANDA" },
+        { "name": "DB_USER", "value": "admin" },
+        { "name": "DB_PASSWORD", "value": "passwordrds" },
+        { "name": "DB_NAME", "value": "lapordesa" },
+        { "name": "S3_BUCKET_NAME", "value": "GANTI_DENGAN_NAMA_BUCKET_ANDA" },
+        { "name": "CLOUDFRONT_DOMAIN", "value": "GANTI_DENGAN_DOMAIN_CLOUDFRONT_ANDA" }
+      ]
+    }
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512"
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buat Laporan - LaporDesa</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn { padding: 10px 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .btn-back { background: #6c757d; text-decoration: none; padding: 10px 15px; color: white; border-radius: 5px; margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Kirim Laporan Pengaduan</h2>
+        <form action="/lapor" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Nama Pelapor:</label>
+                <input type="text" name="pelapor" required>
+            </div>
+            <div class="form-group">
+                <label>Judul Laporan:</label>
+                <input type="text" name="judul" required>
+            </div>
+            <div class="form-group">
+                <label>Deskripsi Laporan:</label>
+                <textarea name="deskripsi" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Lampiran Foto (Wajib Upload Bukti):</label>
+                <input type="file" name="foto" accept="image/*" required>
+            </div>
+            <a href="/" class="btn-back">Kembali</a>
+            <button type="submit" class="btn">Kirim Laporan</button>
+        </form>
+    </div>
+</body>
+</html>

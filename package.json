@@ -1,0 +1,17 @@
+{
+  "name": "lapordesa",
+  "version": "1.0.0",
+  "description": "Sistem Pengaduan Masyarakat Desa",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.0.0",
+    "express": "^4.18.2",
+    "ejs": "^3.1.9",
+    "mysql2": "^3.0.0",
+    "multer": "^1.4.5-lts.1",
+    "dotenv": "^16.0.3"
+  }
+}
