@@ -31,6 +31,26 @@ try {
     connectionLimit: 10,
     queueLimit: 0
   });
+  
+  // Auto Create Table if not exists
+  (async () => {
+    try {
+    const connection = await pool.getConnection();
+    await connection.query(
+      CREATE TABLE IF NOT EXISTS laporan (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        pelapor VARCHAR(255) NOT NULL,
+        judul VARCHAR(255) NOT NULL,
+        deskripsi TEXT NOT NULL,
+        foto VARCHAR(255)
+      )
+    );
+    connection.release();
+    console.log('Database table initialized successfully.');
+    } catch (err) {
+      console.error('Failed to init table:', err);
+    }
+  })();
 } catch (error) {
   console.error('Failed to initialize database pool:', error);
 }
@@ -85,3 +105,4 @@ app.post('/lapor', upload.single('foto'), async (req, res) => {
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
+
