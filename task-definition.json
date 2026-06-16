@@ -1,32 +1,116 @@
 {
-  "family": "lapordesa-task",
-  "networkMode": "awsvpc",
-  "containerDefinitions": [
-    {
-      "name": "lapordesa-app",
-      "image": "IMAGE_PLACEHOLDER",
-      "portMappings": [
+    "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:414061811035:task-definition/lapordesa-task:1",
+    "containerDefinitions": [
         {
-          "containerPort": 80,
-          "hostPort": 80,
-          "protocol": "tcp"
+            "name": "lapordesa-app",
+            "image": "414061811035.dkr.ecr.ap-southeast-2.amazonaws.com/lapordesa",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "name": "lapordesa-app-80-tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DB_NAME",
+                    "value": "lapordesa"
+                },
+                {
+                    "name": "CLOUDFRONT_DOMAIN",
+                    "value": "d1dn0toqpnv8xt.cloudfront.net"
+                },
+                {
+                    "name": "S3_BUCKET_NAME",
+                    "value": "lapordesa-bucket-nimanda"
+                },
+                {
+                    "name": "DB_HOST",
+                    "value": "db-lapordesa.cvmi6m8k88z0.ap-southeast-2.rds.amazonaws.com"
+                },
+                {
+                    "name": "DB_USER",
+                    "value": "admin"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "value": "admin123"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/lapordesa-task",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "ap-southeast-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
         }
-      ],
-      "essential": true,
-      "environment": [
-        { "name": "PORT", "value": "80" },
-        { "name": "DB_HOST", "value": "GANTI_DENGAN_ENDPOINT_RDS_ANDA" },
-        { "name": "DB_USER", "value": "admin" },
-        { "name": "DB_PASSWORD", "value": "passwordrds" },
-        { "name": "DB_NAME", "value": "lapordesa" },
-        { "name": "S3_BUCKET_NAME", "value": "GANTI_DENGAN_NAMA_BUCKET_ANDA" },
-        { "name": "CLOUDFRONT_DOMAIN", "value": "GANTI_DENGAN_DOMAIN_CLOUDFRONT_ANDA" }
-      ]
-    }
-  ],
-  "requiresCompatibilities": [
-    "FARGATE"
-  ],
-  "cpu": "256",
-  "memory": "512"
+    ],
+    "family": "lapordesa-task",
+    "taskRoleArn": "arn:aws:iam::414061811035:role/ECS-role-3a07153b",
+    "executionRoleArn": "arn:aws:iam::414061811035:role/ECS-role-3a07153b",
+    "networkMode": "awsvpc",
+    "revision": 1,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "MANAGED_INSTANCES",
+        "FARGATE"
+    ],
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512",
+    "registeredAt": "2026-06-16T20:54:03.932Z",
+    "registeredBy": "arn:aws:iam::414061811035:root",
+    "enableFaultInjection": false,
+    "tags": []
 }
