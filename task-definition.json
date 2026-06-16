@@ -1,5 +1,4 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:414061811035:task-definition/lapordesa-task:1",
     "containerDefinitions": [
         {
             "name": "lapordesa-app",
@@ -62,44 +61,8 @@
     "taskRoleArn": "arn:aws:iam::414061811035:role/ECS-role-3a07153b",
     "executionRoleArn": "arn:aws:iam::414061811035:role/ECS-role-3a07153b",
     "networkMode": "awsvpc",
-    "revision": 1,
     "volumes": [],
-    "status": "ACTIVE",
-    "requiresAttributes": [
-        {
-            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-        },
-        {
-            "name": "ecs.capability.execution-role-awslogs"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.ecr-auth"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.task-iam-role"
-        },
-        {
-            "name": "ecs.capability.execution-role-ecr-pull"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-        },
-        {
-            "name": "ecs.capability.task-eni"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
-        }
-    ],
     "placementConstraints": [],
-    "compatibilities": [
-        "EC2",
-        "MANAGED_INSTANCES",
-        "FARGATE"
-    ],
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
@@ -109,8 +72,5 @@
     ],
     "cpu": "256",
     "memory": "512",
-    "registeredAt": "2026-06-16T20:54:03.932Z",
-    "registeredBy": "arn:aws:iam::414061811035:root",
-    "enableFaultInjection": false,
     "tags": []
 }
